@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Mehak ❤️</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+body{
+height:100vh;
+overflow:hidden;
+background:linear-gradient(to bottom,#4facfe,#00c6ff);
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+color:white;
+text-align:center;
+}
+
+#ocean{
+position:absolute;
+width:100%;
+height:100%;
+background:
+linear-gradient(to bottom,#87CEEB 0%,#4facfe 40%,#0066cc 100%);
+z-index:-2;
+}
+
+#character{
+width:320px;
+height:320px;
+object-fit:contain;
+border-radius:20px;
+background:white;
+padding:10px;
+box-shadow:0 0 30px rgba(255,255,255,.5);
+}
+
+#name{
+font-size:2rem;
+margin-top:20px;
+font-weight:bold;
+}
+
+#message{
+font-size:1.5rem;
+margin-top:10px;
+max-width:700px;
+padding:10px;
+}
+
+#finalScreen{
+display:none;
+flex-direction:column;
+align-items:center;
+}
+
+#crew{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:10px;
+max-width:1200px;
+margin-top:20px;
+}
+
+#crew img{
+width:120px;
+height:120px;
+object-fit:cover;
+border-radius:15px;
+animation:dance .7s infinite alternate;
+}
+
+@keyframes dance{
+from{
+transform:translateY(0) rotate(-5deg);
+}
+to{
+transform:translateY(-15px) rotate(5deg);
+}
+}
+
+#birthday{
+font-size:4rem;
+font-weight:bold;
+color:yellow;
+text-shadow:0 0 20px gold;
+animation:glow 1s infinite alternate;
+}
+
+@keyframes glow{
+from{
+transform:scale(1);
+}
+to{
+transform:scale(1.08);
+}
+}
+
+#cake{
+font-size:120px;
+margin-top:10px;
+}
+
+.confetti{
+position:absolute;
+width:10px;
+height:10px;
+background:red;
+top:-10px;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+to{
+transform:translateY(110vh) rotate(720deg);
+}
+}
+</style>
+</head>
+
+<body>
+
+<div id="ocean"></div>
+
+<img id="character" src="images/luffy.png">
+
+<div id="name"></div>
+<div id="message"></div>
+
+<div id="finalScreen">
+
+<h1 id="birthday">
+🎉 HAPPY BIRTHDAY MEHAK 🎉
+</h1>
+
+<div id="cake">🎂</div>
+
+<h2 style="margin-top:15px;">
+Welcome aboard the Thousand Sunny!
+</h2>
+
+<div id="crew">
+<img src="images/luffy.png">
+<img src="images/zoro.png">
+<img src="images/nami.png">
+<img src="images/usopp.png">
+<img src="images/sanji.png">
+<img src="images/chopper.png">
+<img src="images/robin.png">
+<img src="images/franky.png">
+<img src="images/brook.png">
+<img src="images/jinbe.png">
+</div>
+
+<h2 style="margin-top:25px;">
+🎵 Happy Birthday To You 🎵
+</h2>
+
+</div>
+
+<!-- Put your birthday song inside project folder -->
+<audio id="song" loop>
+<source src="birthday.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+const crew = [
+
+{
+name:"LUFFY",
+image:"images/luffy.png",
+message:"Happy Birthday Mehak! Let's have the biggest party in the Grand Line!"
+},
+
+{
+name:"ZORO",
+image:"images/zoro.png",
+message:"Happy Birthday Mehak. Keep moving forward and never give up."
+},
+
+{
+name:"NAMI",
+image:"images/nami.png",
+message:"Wishing you lots of happiness, adventure and treasure!"
+},
+
+{
+name:"USOPP",
+image:"images/usopp.png",
+message:"Today is the birthday of the legendary Mehak!"
+},
+
+{
+name:"SANJI",
+image:"images/sanji.png",
+message:"Happy Birthday Mehak! May every dream come true."
+},
+
+{
+name:"CHOPPER",
+image:"images/chopper.png",
+message:"Have lots of cake, smiles and wonderful memories!"
+},
+
+{
+name:"ROBIN",
+image:"images/robin.png",
+message:"May your future be filled with beautiful adventures."
+},
+
+{
+name:"FRANKY",
+image:"images/franky.png",
+message:"SUPER Happy Birthday Mehak!"
+},
+
+{
+name:"BROOK",
+image:"images/brook.png",
+message:"Yohohoho! Have an amazing birthday!"
+},
+
+{
+name:"JINBE",
+image:"images/jinbe.png",
+message:"May calm seas guide you to a bright future."
+}
+
+];
+
+const character = document.getElementById("character");
+const nameBox = document.getElementById("name");
+const messageBox = document.getElementById("message");
+
+let index = 0;
+
+function showCharacter(){
+
+if(index < crew.length){
+
+character.src = crew[index].image;
+nameBox.innerText = crew[index].name;
+messageBox.innerText = crew[index].message;
+
+index++;
+
+setTimeout(showCharacter,4000);
+
+}else{
+
+character.style.display="none";
+nameBox.style.display="none";
+messageBox.style.display="none";
+
+document.getElementById("finalScreen").style.display="flex";
+
+document.getElementById("song").play();
+
+createConfetti();
+
+}
+}
+
+showCharacter();
+
+function createConfetti(){
+
+for(let i=0;i<150;i++){
+
+const c = document.createElement("div");
+
+c.classList.add("confetti");
+
+c.style.left=Math.random()*100+"vw";
+
+c.style.animationDuration=
+(Math.random()*3+2)+"s";
+
+c.style.background=
+`hsl(${Math.random()*360},100%,50%)`;
+
+document.body.appendChild(c);
+}
+}
+
+</script>
+
+</body>
+</html>
